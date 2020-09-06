@@ -5,6 +5,8 @@ function setup() {
   createCanvas(500, 500);
   colorMode(HSB, 360, 100, 100);
   backgroundColor = 95;
+  
+  //setting location of frog, velocities of the cars and logs. Also setting the colors of the cars.
   frogX = width/2;
   frogY = height - 20;
   score = 0;
@@ -43,6 +45,7 @@ function draw() {
   displayScores();
 }
 
+//assigning each key to a function
 function keyPressed() {
   if (keyCode === UP_ARROW) {
     frogY -= 10;
@@ -58,6 +61,7 @@ function keyPressed() {
   }
 }
 
+//moves the cars across the screen 
 function moveCars() {
   car1X += car1V;
   if (car1X > width){
@@ -69,6 +73,7 @@ function moveCars() {
   }
 }
 
+//draws the cars on the screen
 function drawCars() {
   // Code for car 1
   fill(car1Color, 80, 80);
@@ -78,11 +83,13 @@ function drawCars() {
   // Code for additional cars
 }
 
+//draws the water for the log to be on
 function drawWater() {
   fill("cyan");
   rect(0, 300, width, 50);
 }
 
+//checks if the frog collides with the cars, log, or water. If collides with car or water, restart and decrease lives. If collides with log, make the frog move with the log.
 function checkCollisions() {
   // If the frog collides with the car, reset the frog and subtract a life.
   collideOne = collideRectCircle(car1X, car1Y, 40, 30, frogX, frogY, 20);
@@ -118,9 +125,8 @@ function checkCollisions() {
   }
 }
 
+// If the frog makes it into the yellow gold zone, increment the score and move the frog back down to the bottom.
 function checkWin() {
-  // If the frog makes it into the yellow gold zone, increment the score
-  // and move the frog back down to the bottom.
   if (frogY < 50){
     score += 1;
     frogX = width/2;
@@ -128,6 +134,7 @@ function checkWin() {
   }
 }
 
+//displays the score and # of lives of the player
 function displayScores() {
   textSize(12);
   fill(0);
@@ -147,11 +154,13 @@ function displayScores() {
   }
 }
 
+//draws the logs
 function drawLog(){
   fill("brown");
   rect(logX, logY, 100, 50);
 }
 
+//function to move the log across the screen
 function moveLog(){
   logX += logV;
   if (logX > width){
